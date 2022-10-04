@@ -62,7 +62,7 @@ public class PostagemController {
 	    
 	}
 	
-	@PutMapping
+	@PutMapping //Vai atualizar os dados da postagem de ID selecionado
 	public ResponseEntity<Postagem> put (@Valid @RequestBody Postagem postagem){
 	    return postagemRepository.findById(postagem.getId())
 	            .map(resposta -> ResponseEntity.status(HttpStatus.OK)
