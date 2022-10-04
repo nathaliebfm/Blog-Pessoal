@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.generation.blogpessoal.model.Tema;
+import com.generation.blogpessoal.repository.TemaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +23,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.blogpessoal.model.Tema;
-import com.generation.blogpessoal.repository.TemaRepository;
-
 @RestController
 @RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -36,10 +36,9 @@ public class TemaController {
         return ResponseEntity.ok(temaRepository.findAll());
     }
     
-    @GetMapping
-    public ResponseEntity<Tema> getById (@PathVariable Long id){
-        return temaRepository.findById(id)
-                .map(resposta -> ResponseEntity.ok(resposta))
+    @GetMapping("/{id}")
+    public ResponseEntity<Tema> getById(@PathVariable Long id){
+        return temaRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     
@@ -65,12 +64,11 @@ public class TemaController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         Optional<Tema> tema = temaRepository.findById(id);
+        
         if(tema.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         
-        temaRepository.deleteById(id);
+        temaRepository.deleteById(id);              
     }
-    
-    
 
 }
