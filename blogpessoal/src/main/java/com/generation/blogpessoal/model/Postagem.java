@@ -37,6 +37,10 @@ public class Postagem {
 	@ManyToOne
 	@JsonIgnoreProperties("postagem") //fala para o Json não virar um looping infinito, ignorando a propriedade de postagens
 	private Tema tema; //Cria a chave estrangeira da tabela Tema
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
 	public Tema getTema() {
         return tema;
@@ -77,6 +81,14 @@ public class Postagem {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 	
 	
 
