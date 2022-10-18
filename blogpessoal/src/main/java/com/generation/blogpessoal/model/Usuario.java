@@ -40,6 +40,22 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE) //Cascade = se apagar o usuário, apaga todas as suas postagens
     @JsonIgnoreProperties("usuario")
     private List<Postagem> postagem;
+    
+
+     public Usuario(Long id,String usuario,String nome,String senha,String foto) {
+        this.id = id;
+        this.usuario = usuario;
+        this.nome = nome;
+        this.senha = senha;
+        this.foto = foto;
+    }//Não colocou postagem, pois é uma variável de relação (foreign key), então não precisa do construtor
+     
+     
+
+    public Usuario() {
+    }
+
+
 
     public Long getId() {
         return id;
